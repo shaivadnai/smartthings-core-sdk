@@ -1,6 +1,6 @@
 import { Endpoint } from '../endpoint'
 import { EndpointClient, EndpointClientConfig, HttpClientParams } from '../endpoint-client'
-import { ConfigEntry } from './installedapps'
+import { ConfigEntry} from './installedapps'
 import { Links, Status, SuccessStatusValue } from '../types'
 import { PresentationDevicePresentation } from './presentation'
 
@@ -416,7 +416,7 @@ export interface IrDeviceDetails {
 	ocfDeviceType?: string
 	irCode?: string
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	functionCodes?: { default?: string;[name: string]: any }
+	functionCodes?: { default?: string; [name: string]: any }
 	childDevices?: IrDeviceDetails[]
 	metadata?: object
 }
@@ -1342,6 +1342,6 @@ export class DevicesEndpoint extends Endpoint {
 				hueColor = 0
 		}
 
-		return { hue: hueColor, saturation }
+		return {hue: hueColor, saturation}
 	}
 }
