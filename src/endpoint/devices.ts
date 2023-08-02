@@ -1,6 +1,6 @@
 import { Endpoint } from '../endpoint'
 import { EndpointClient, EndpointClientConfig, HttpClientParams } from '../endpoint-client'
-import { ConfigEntry} from './installedapps'
+import { ConfigEntry } from './installedapps'
 import { Links, Status, SuccessStatusValue } from '../types'
 import { PresentationDevicePresentation } from './presentation'
 
@@ -416,7 +416,7 @@ export interface IrDeviceDetails {
 	ocfDeviceType?: string
 	irCode?: string
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	functionCodes?: { default?: string; [name: string]: any }
+	functionCodes?: { default?: string;[name: string]: any }
 	childDevices?: IrDeviceDetails[]
 	metadata?: object
 }
@@ -1187,9 +1187,15 @@ export class DevicesEndpoint extends Endpoint {
 	 * Sends the specified list of commands to the device
 	 * @param id UUID of the device
 	 * @param commands list of commands
+	 * @param ordered Specifies whether the command should be executed in order or asynchronously.
 	 */
-	public async executeCommands(id: string, commands: Command[]): Promise<CommandResponse> {
-		return this.client.post(`${id}/commands`, { commands })
+	public async executeCommands(id: string, commands: Command[], ordered?: boolean): Promise<CommandResponse> {
+		if (ordered) {
+			return this.client.post(`${id}/commands`, { commands }, { 'ordered': ordered })
+		}
+		else {
+			return this.client.post(`${id}/commands`, { commands })
+		}
 	}
 
 	/**
@@ -1336,6 +1342,6 @@ export class DevicesEndpoint extends Endpoint {
 				hueColor = 0
 		}
 
-		return {hue: hueColor, saturation}
+		return { hue: hueColor, saturation }
 	}
 }
