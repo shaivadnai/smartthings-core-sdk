@@ -1190,12 +1190,7 @@ export class DevicesEndpoint extends Endpoint {
 	 * @param ordered Specifies whether the command should be executed in order or asynchronously.
 	 */
 	public async executeCommands(id: string, commands: Command[], ordered?: boolean): Promise<CommandResponse> {
-		if (ordered) {
-			return this.client.post(`${id}/commands`, { commands }, { 'ordered': ordered })
-		}
-		else {
-			return this.client.post(`${id}/commands`, { commands })
-		}
+		return this.client.post(`${id}/commands`, { commands }, { 'ordered': ordered! })		
 	}
 
 	/**

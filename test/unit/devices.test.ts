@@ -348,7 +348,7 @@ describe('DevicesEndpoint', () => {
 			expect(await devicesEndpoint.executeCommands('device-id', [command])).toBe(commandResponse)
 
 			expect(postSpy).toHaveBeenCalledTimes(1)
-			expect(postSpy).toHaveBeenCalledWith('device-id/commands', { commands: [command] })
+			expect(postSpy).toHaveBeenCalledWith('device-id/commands', { commands: [command] }, {'ordered': undefined})
 		})
 
 		it('works with true ordered param passed', async () => {
@@ -366,7 +366,7 @@ describe('DevicesEndpoint', () => {
 			expect(await devicesEndpoint.executeCommands('device-id', [command], false)).toBe(commandResponse)
 
 			expect(postSpy).toHaveBeenCalledTimes(1)
-			expect(postSpy).toHaveBeenCalledWith('device-id/commands', { commands: [command] })
+			expect(postSpy).toHaveBeenCalledWith('device-id/commands', { commands: [command] }, {'ordered': false})
 		})
 
 		it('passes on exceptions', async () => {
@@ -377,7 +377,7 @@ describe('DevicesEndpoint', () => {
 			await expect(devicesEndpoint.executeCommands('device-id', [command])).rejects.toThrow(error)
 
 			expect(postSpy).toHaveBeenCalledTimes(1)
-			expect(postSpy).toHaveBeenCalledWith('device-id/commands', { commands: [command] })
+			expect(postSpy).toHaveBeenCalledWith('device-id/commands', { commands: [command] }, {'ordered': undefined})
 		})
 	})
 
